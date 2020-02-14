@@ -1,0 +1,38 @@
+
+.homepage-content-wrapper {
+    height: calc(100vh - 80px);
+    width: 100%;
+    background-color: #173e5f;
+    
+    p {
+        text-align: center;
+        color: white;
+        font-size: 52px;
+        font-weight: 600;
+
+        &:first-child{
+            padding-top: calc(40vh - 80px);
+        }
+    }
+
+    .fade-up {
+        position: relative;
+        animation: fadeUp 3s;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            top: 200px;
+        }
+        to {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    
+}
+
+
+  
