@@ -1,0 +1,97 @@
+
+
+.login-wrapper {
+
+    height: 80px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    z-index: 1;  
+    font-family: 'Roboto', sans-serif;
+    font-style: bold;
+    // line-height: 80px;
+
+    display: table;
+    margin: 0 auto;
+    background-color: #50C8E2;
+
+    nav {
+
+        height: 80px;
+        width: 100%;
+        background-color: white;
+        margin: 0px;
+        padding: 0px;
+        // position: fixed;
+        // top: 0;
+        // left: 0;
+        z-index: 1;  
+        font-family: 'Roboto', sans-serif;
+        font-style: bold;
+        line-height: 80px;
+        background-color: #50C8E2;
+        
+        
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            
+            font-size: 28px;
+            margin-left: 24px;
+            font-weight: 700;
+        }
+    }
+
+    .login-signup-form-wrapper {
+        
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+
+        p{
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login-signup-form {
+            margin: 0 auto;
+            width: 80%;
+            // position:    relative;
+            border:3px solid blue;
+            text-align: center;
+            display: flex;
+        
+            .login-form {
+                
+
+                margin: 0 auto;
+                background-color: white;
+                display: inline-block;
+            }
+            .signup-form {
+                
+
+                margin: 0 auto;
+                display: inline-block;
+                
+
+                background-color: white;
+                
+            }
+
+            .form {
+                width: 40%;
+                height: 500px;
+                border-radius: 25px;
+                box-shadow: 12px 10px 	rgba(23, 23, 23, 0.12);
+
+                
+            }
+        } 
+    }
+
+
+
+}
