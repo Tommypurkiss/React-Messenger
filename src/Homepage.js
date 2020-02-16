@@ -1,6 +1,4 @@
 import React from 'react'
-import './homepage/homepage-header.scss';
-import './homepage/homepage-content.scss';
 
 // import { Link } from 'react-router-dom';
 
@@ -52,21 +50,82 @@ import './homepage/homepage-content.scss';
 // import React from 'react';
 import fire from './config/Firebase';
 
+import './styles/homepage.scss'
+
 class Homepage extends React.Component {
 
     logout() {
         fire.auth().signOut();
     }
 
+    
+    
+    sendMessage() {
+
+        const messages = document.getElementById("ul-messages");
+        const textbox = document.getElementById("textbox");
+
+        const newMessage = document.createElement("li");
+        newMessage.innerHTML = textbox.value;
+        messages.appendChild(newMessage);
+        textbox.value = "";
+    }
+
+    addFriend() {
+
+    }
 
     render() {
         return(
 
             <div className="homepage">
-                <h1>
-                    Homepage - chat page
-                </h1>
-                <button onClick={this.logout}>Sign Out</button>
+                <nav>
+                    <div className="logo">
+                        React Messenger             
+                    </div>
+                    <div className="signout">
+                        <button onClick={this.logout}>Sign Out</button>
+                    </div>
+
+                </nav>
+                <div className="homepage-main-content">
+                    
+                    <div className="side-menu-wrapper">
+                        
+                        <div className="side-menu-top">
+                            <button>
+                                Add Friend
+                            </button>
+                        </div>
+                        <div className="friends-chats">
+                            <h3>
+                                Friends and Chats
+                            </h3>
+                            <div className="friends-chat-list">
+                                <ul>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="chat-wrapper">
+                        <h3>
+                            CHAT
+                        </h3>
+                        <div className="chat-log">
+                            <ul className="ul-messages" id="ul-messages">
+
+                            </ul>
+                        </div>
+                        <div className="chat-text">
+                            <input type="text" className="textbox" id="textbox"/>
+                            <button className="send-button" id="send-button" onClick={this.sendMessage}>
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
 
         );

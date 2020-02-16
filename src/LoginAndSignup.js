@@ -16,23 +16,32 @@ class Login extends React.Component {
             })
             .catch((err) => {
                 console.log("Failed to log in" + err.toString());
-
             })
     }
 
     signup() {
+        const signupUsername = document.querySelector("#signup-username").value;
         const signupEmail = document.querySelector("#signup-email").value;
         const signupPassword = document.querySelector("#signup-password").value;
 
         fire.auth().createUserWithEmailAndPassword(signupEmail, signupPassword)
             .then((u) => {
-                console.log("Succesfully logged up");
+                console.log("Succesfully signed up", u);
+
+                var userId = fire.auth().currentUser.uid;
+
+                fire.database().ref("users/" + userId).set({
+                    username: signupUsername,
+                    email: signupEmail,
+                    userid: userId
+                    
+                })
             })
             .catch((err) => {
                 console.log("Failed to log in" + err.toString());
-
             })
     }
+
 
 
     render() {
@@ -49,18 +58,15 @@ class Login extends React.Component {
             
             <div className="login-signup-form-wrapper">
 
-
-                
                 <div className="login-signup-form">
 
                     <div className="login-form form">
                         <h2>Login</h2>
                         
                         <div action="" className="login-form-content">
-                            {/* <label htmlFor="email" ><b>Email</b></label> <br/> */}
+
                             <input type="email" id="login-email" placeholder="Email" required/><br/>
                         
-                            {/* <label htmlFor="password"><b>Password</b></label><br/> */}
                             <input type="password" id="login-password" name="" placeholder="Password" required/> <br/>
 
                             <button type="submit" onClick={this.login}>Login</button>
@@ -73,10 +79,10 @@ class Login extends React.Component {
                         <h2>Sign up</h2>
                         <div action="" className="signup-form-content">
 
-                            {/* <label htmlFor="email" ><b>Email</b></label> <br/> */}
+                            <input type="text" name="name" id="signup-username" placeholder="Username"/> <br/>
+
                             <input type="email" id="signup-email" placeholder="Email" required/><br/>
                         
-                            {/* <label htmlFor="password"><b>Password</b></label><br/> */}
                             <input type="password" name="" id="signup-password" placeholder="Password" required/><br/>
                     
                             <input type="password" name="" id="confirm-signup-password" placeholder="Confirm Password" required/><br/>

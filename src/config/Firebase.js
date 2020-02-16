@@ -12,6 +12,7 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   const fire = firebase.initializeApp(firebaseConfig);
+  // const fireDatabase = firebase.database();
   firebase.analytics();
 
   export default fire;
