@@ -49,37 +49,41 @@ class Login extends React.Component {
             
             <div className="login-signup-form-wrapper">
 
-                <p>
-                    Please note this application is currently in testing!
-                </p>
+
                 
                 <div className="login-signup-form">
 
-                <div className="login-form form">
-                    <h2>Login</h2>
-                    <label htmlFor="email" ><b>Email</b></label> <br/>
-                    <input type="email" id="login-email" placeholder="Please enter your email" required/><br/>
-                
-                    <label htmlFor="password"><b>Password</b></label><br/>
-                    <input type="password" id="login-password" name="" placeholder="Please enter your password" required/> <br/>
+                    <div className="login-form form">
+                        <h2>Login</h2>
+                        
+                        <div action="" className="login-form-content">
+                            {/* <label htmlFor="email" ><b>Email</b></label> <br/> */}
+                            <input type="email" id="login-email" placeholder="Email" required/><br/>
+                        
+                            {/* <label htmlFor="password"><b>Password</b></label><br/> */}
+                            <input type="password" id="login-password" name="" placeholder="Password" required/> <br/>
 
-                    <button onClick={this.login}>Log in</button>
-                </div>
+                            <button type="submit" onClick={this.login}>Login</button>
+                        </div>
+                    </div>
                 
                 <br/>
 
-                <div className="signup-form form" >
-                    <h2>Sign up</h2>
+                    <div className="signup-form form" >
+                        <h2>Sign up</h2>
+                        <div action="" className="signup-form-content">
 
+                            {/* <label htmlFor="email" ><b>Email</b></label> <br/> */}
+                            <input type="email" id="signup-email" placeholder="Email" required/><br/>
+                        
+                            {/* <label htmlFor="password"><b>Password</b></label><br/> */}
+                            <input type="password" name="" id="signup-password" placeholder="Password" required/><br/>
                     
-                    <label htmlFor="email" ><b>Email</b></label> <br/>
-                    <input type="email" id="signup-email" placeholder="Please enter your email" required/><br/>
-                
-                    <label htmlFor="password"><b>Password</b></label><br/>
-                    <input type="password" name="" id="signup-password" placeholder="Please enter your password" required/><br/>
-            
-                    <button onClick={this.signup}>Sign up</button>
-                </div>
+                            <input type="password" name="" id="confirm-signup-password" placeholder="Confirm Password" required/><br/>
+
+                            <button onClick={this.signup}>Sign up</button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
