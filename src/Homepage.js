@@ -33,93 +33,37 @@ class Homepage extends React.Component {
 
     loadFriendsList() {
 
-
     }
 
     // TODO: FIX THIS
     retrieveDataOnLogin() {
 
-        // retieve username
+        // retrieve userid
         const userId = fire.auth().currentUser.uid;
         console.log(userId)
 
-        // const snapshot = fire.database().ref('users/' + userId).once('value');
-        // console.log("snapshot is: ", snapshot) //returns a promise?
-        
-        // let userText = document.querySelector('#username');
-
-        // userText.innerHTML = snapshot.val()
 
 
+        // Get a database reference to our posts
+        var db = fire.database();
+        var ref = db.ref("users/" + userId + "/username");
 
-        // snapshot.on("value", function(snapshot) {
-        //     console.log(snapshot.val());
-        //   }, function (errorObject) {
-        //     console.log("The read failed: " + errorObject.code);
-        //   });
-          
+        // Attach an asynchronous callback to read the data at our posts reference
+        ref.on("value", function(snapshot) {
 
-        // returns full db link?
-        var starCountRef = fire.database().ref('posts/' + userId + '/username');
-        starCountRef.on('value', function(snapshot) {
-        // updateStarCount(postElement, snapshot.val());
-        console.log(starCountRef.toString())
+        let usernameText = document.querySelector('#username');
 
-        let userText = document.querySelector('#username');
 
-        userText.innerHTML = starCountRef
+        usernameText.innerHTML = snapshot.val();
+        console.log("username text val is: ", usernameText);
+
+        }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
         });
 
-
-
-
-// Write and then read back a string from the Database.
-// ref.set("hello")
-//   .then(function() {
-//     return ref.once("value");
-//   })
-//   .then(function(snapshot) {
-//     var data = snapshot.val(); // data === "hello"
-//   });
-
-
-// Write and then read back a JavaScript object from the Database.
-// ref.set({ name: "Ada", age: 36 })
-//   .then(function() {
-//    return ref.once("value");
-//   })
-//   .then(function(snapshot) {
-//     var data = snapshot.val();
-//     // data is { "name": "Ada", "age": 36 }
-//     // data.name === "Ada"
-//     // data.age === 36
-//   });
-
-
-        // const snapshot = fire.database().ref('/users/' + userId).once('value');
-        // // + '/email'
-        // console.log("snapshot is: ", snapshot.value);
-        // let user = document.getElementById("username");
-        // var user = (snapshot.val().username);
-
-        // console.log("user is: ", user);
-        // user.innerHTML = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-
-        // var admin = require("firebase-admin");
-
-        // // Get a database reference to our posts
-        // var db = admin.database();
-        // var ref = db.ref("/users/" + userId + "/username");
-
-        // ref.on("value", function(snapshot) {
-        //     console.log(snapshot.val());
-        //   }, function (errorObject) {
-        //     console.log("The read failed: " + errorObject.code);
-        //   });
     }
 
 
-    // {this.retrieveDataOnLogin}
 
 
 
@@ -131,7 +75,6 @@ class Homepage extends React.Component {
             
 
             <div className="homepage">
-                {/* {this.retrieveDataOnLogin().bind(this)} */}
                 {this.retrieveDataOnLogin()}
 
                 <nav>
@@ -149,7 +92,8 @@ class Homepage extends React.Component {
                         
                         <div className="side-menu-top">
                             <p>
-                                Welcome back, <span id="username"></span>!
+                                Welcome back, <span id="username"></span> !
+                                
                             </p>
                             
                             <button>
@@ -193,6 +137,7 @@ class Homepage extends React.Component {
                 {/* Modal */}
                 
                 
+
             </div>
 
         );
