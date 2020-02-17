@@ -5,6 +5,9 @@ import './styles/loginandsignup.scss';
 
 class Login extends React.Component {
 
+    
+
+    
 
     login() {
         const loginEmail = document.querySelector("#login-email").value;
@@ -13,6 +16,7 @@ class Login extends React.Component {
         fire.auth().signInWithEmailAndPassword(loginEmail, loginPassword)
             .then((u) => {
                 console.log("Succesfully logged in");
+                
             })
             .catch((err) => {
                 console.log("Failed to log in" + err.toString());
@@ -79,7 +83,7 @@ class Login extends React.Component {
                         <h2>Sign up</h2>
                         <div action="" className="signup-form-content">
 
-                            <input type="text" name="name" id="signup-username" placeholder="Username"/> <br/>
+                            <input type="text" name="name" id="signup-username" placeholder="Username" required/>  <br/>
 
                             <input type="email" id="signup-email" placeholder="Email" required/><br/>
                         

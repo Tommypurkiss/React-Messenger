@@ -1,65 +1,16 @@
 import React from 'react'
-
-// import { Link } from 'react-router-dom';
-
-// function Homepage() {
-//     return(
-//         <div className="homepage-wrapper">
-//             <nav className="nav-header">
-//             <div className="logo">
-//             <Link to="/">
-//              React Messenger
-//              </Link>
-//              {/* <a href="#">React Messenger</a> */}
-//             </div>f
-//             <div className="nav-links">
-//                 <ul>
-//                  <Link to="/login">
-//                  <li>Log In</li>
-//                  </Link>
-
-//                  <Link to="/signup">
-//                  <li>Sign Up</li>
-//                  </Link>
-
-
-//                  {/* TODO: Fix this className="signup-button" */}
-                
-//                  {/* <li><a href="#">Log In</a></li>
-
-//                  <li><a href="#" className="signup-button">Sign Up</a></li> */}
-
-//                 </ul>
-//             </div>
-//             </nav>
-//             <div className="homepage-content-wrapper">
-//              <p className="fade-up">
-//                  A new instant messenger!
-//             </p>
-//              <p className="fade-up">
-//                  Sign Up to start chatting now!
-//              </p>
-//          </div>
-//         </div>
-//     );
-// }
-
-// export default Homepage;
-
-
-// import React from 'react';
 import fire from './config/Firebase';
 
 import './styles/homepage.scss'
 
 class Homepage extends React.Component {
 
+    // logs  out of  application
     logout() {
         fire.auth().signOut();
     }
 
-    
-    
+
     sendMessage() {
 
         const messages = document.getElementById("ul-messages");
@@ -71,14 +22,118 @@ class Homepage extends React.Component {
         textbox.value = "";
     }
 
+
+    searchFriend() {
+
+    }
+
     addFriend() {
 
     }
 
+    loadFriendsList() {
+
+
+    }
+
+    // TODO: FIX THIS
+    retrieveDataOnLogin() {
+
+        // retieve username
+        const userId = fire.auth().currentUser.uid;
+        console.log(userId)
+
+        // const snapshot = fire.database().ref('users/' + userId).once('value');
+        // console.log("snapshot is: ", snapshot) //returns a promise?
+        
+        // let userText = document.querySelector('#username');
+
+        // userText.innerHTML = snapshot.val()
+
+
+
+        // snapshot.on("value", function(snapshot) {
+        //     console.log(snapshot.val());
+        //   }, function (errorObject) {
+        //     console.log("The read failed: " + errorObject.code);
+        //   });
+          
+
+        // returns full db link?
+        var starCountRef = fire.database().ref('posts/' + userId + '/username');
+        starCountRef.on('value', function(snapshot) {
+        // updateStarCount(postElement, snapshot.val());
+        console.log(starCountRef.toString())
+
+        let userText = document.querySelector('#username');
+
+        userText.innerHTML = starCountRef
+        });
+
+
+
+
+// Write and then read back a string from the Database.
+// ref.set("hello")
+//   .then(function() {
+//     return ref.once("value");
+//   })
+//   .then(function(snapshot) {
+//     var data = snapshot.val(); // data === "hello"
+//   });
+
+
+// Write and then read back a JavaScript object from the Database.
+// ref.set({ name: "Ada", age: 36 })
+//   .then(function() {
+//    return ref.once("value");
+//   })
+//   .then(function(snapshot) {
+//     var data = snapshot.val();
+//     // data is { "name": "Ada", "age": 36 }
+//     // data.name === "Ada"
+//     // data.age === 36
+//   });
+
+
+        // const snapshot = fire.database().ref('/users/' + userId).once('value');
+        // // + '/email'
+        // console.log("snapshot is: ", snapshot.value);
+        // let user = document.getElementById("username");
+        // var user = (snapshot.val().username);
+
+        // console.log("user is: ", user);
+        // user.innerHTML = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+
+        // var admin = require("firebase-admin");
+
+        // // Get a database reference to our posts
+        // var db = admin.database();
+        // var ref = db.ref("/users/" + userId + "/username");
+
+        // ref.on("value", function(snapshot) {
+        //     console.log(snapshot.val());
+        //   }, function (errorObject) {
+        //     console.log("The read failed: " + errorObject.code);
+        //   });
+    }
+
+
+    // {this.retrieveDataOnLogin}
+
+
+
+
+
     render() {
         return(
+            
+            
 
             <div className="homepage">
+                {/* {this.retrieveDataOnLogin().bind(this)} */}
+                {this.retrieveDataOnLogin()}
+
                 <nav>
                     <div className="logo">
                         React Messenger             
@@ -93,6 +148,13 @@ class Homepage extends React.Component {
                     <div className="side-menu-wrapper">
                         
                         <div className="side-menu-top">
+                            <p>
+                                Welcome back, <span id="username"></span>!
+                            </p>
+                            
+                            <button>
+                                Settings
+                            </button>
                             <button>
                                 Add Friend
                             </button>
@@ -103,7 +165,7 @@ class Homepage extends React.Component {
                             </h3>
                             <div className="friends-chat-list">
                                 <ul>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -125,6 +187,11 @@ class Homepage extends React.Component {
                         </div>
                     </div>
                 </div>
+
+
+
+                {/* Modal */}
+                
                 
             </div>
 
