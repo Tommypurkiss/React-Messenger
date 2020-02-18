@@ -80,13 +80,19 @@
                 // border: 1px solid black;
                 background-color: rgb(53, 131, 148);
                 
-                
-                p {
-                    float: left;
-                }
-                button {
-                    float: right;
-                }
+                    div {
+                        width: 100%;
+                        height: 50%;
+                        border: 1px solid black;
+
+                        
+                    }
+                // p {
+                //     float: left;
+                // }
+                // button {
+                //     float: right;
+                // }
 
             }
             .friends-chats {

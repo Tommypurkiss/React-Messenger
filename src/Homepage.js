@@ -5,11 +5,6 @@ import './styles/homepage.scss'
 
 class Homepage extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-
-    //     this.listAllUsers = this.listAllUsers.bind(this);
-    // }
 
     // logs  out of  application
     logout() {
@@ -31,27 +26,10 @@ class Homepage extends React.Component {
 
 
 
+    // listAllUsers(){
+        
+    // }
 
-
-
-    // listAllUsers(nextPageToken) {
-    //     // List batch of users, 1000 at a time.
-    //     fire.auth().listUsers(1000, nextPageToken)
-    //       .then(function(listUsersResult) {
-    //         listUsersResult.users.forEach(function(userRecord) {
-    //           console.log('user', userRecord.toJSON());
-    //         });
-    //         if (listUsersResult.pageToken) {
-    //           // List next batch of users.
-    //           listAllUsers(listUsersResult.pageToken);
-    //         }
-    //       })
-    //       .catch(function(error) {
-    //         console.log('Error listing users:', error);
-    //       });
-    //   }
-    //   Start listing users from the beginning, 1000 at a time.
-    //   listAllUsers();
 
 
 
@@ -63,26 +41,115 @@ class Homepage extends React.Component {
         // next to a user maybe have an add friend plus button which will send a friend request?
         // searched firends is = database returning the users 
         
-        console.log("hello")
-
-        // database here
-
-        // const allUserIds = fire.auth().currentUser.uid;
-        // const allUserIds = fire.auth().listUsers().uid;
-
-        // console.log(allUserIds)
-
-        // var db = fire.database();
-        // var ref = db.ref("users/" + allUserIds + "/username");
 
 
-        // const searchedFriends = document.querySelector('ul-searched-friends');
-        // this.listAllUsers();
+
+
+
+
+        // const uid = "ueyYgjPNXwgZjhc9VytQ1kMF9zh2"
+        var db = fire.database();
+
+        var ref = db.ref("users/");
+
+        // var ref = db.ref("users/" + uid + "/username");
+        // var ref = db.ref(listAllUsers());
+
+
+
+        // function* searchUsers(action) {
+        //     const database = fire.database();
+        //     const ref = database.ref('users');
+        //     try {
+        //         console.log('about to fetch filters users');
+        //         const query = ref.orderByChild('username').startAt(action.searchText).endAt(action.searchText + "\uf8ff");
+        //         // const query = ref.orderByChild('username').startAt(action.searchText.charAt(0));
+
+        //         // const snapshot = yield call([query, query.once], 'value');
+        //         const snapshot = yield call([query, query.once], 'value');
+                
+        //         snapshot.forEach(function(child) { 
+        //         console.log(child.key, child.val().username);
+        //         });
+        //         console.log('done fetching users');
+        //         console.log(snapshot);
+        //     }
+        //     catch(error){
+        //         console.log(error);
+        //     }
+        // }
+        // searchUsers()
+
+
+
+        let searchedFriendUsername = "AngryTh0mas" // pretend this is a user in db
+        let searchbarText = document.getElementById('searchbar');
+        let ulSearchedFriends = document.getElementById('ul-searched-friends');
+        let showFriendLi = document.createElement("li");
+
+        // let value = ""
+        ref.on("value", function(snapshot) {
+
+            let value = snapshot.val();
+            
+            console.log("value is: ", value);
+
+
+            if (searchbarText.value === value) {
+                console.log("true")
+    
+                // showFriendLi.innerHTML = searchbarText.value;
+                showFriendLi.innerHTML = value;
+    
+                ulSearchedFriends.appendChild(showFriendLi);
+    
+            }
+            else if (searchbarText.value !== value) {
+                showFriendLi.innerHTML = "no friends found"
+                ulSearchedFriends.appendChild(showFriendLi);
+            }
+
+ 
+    
+
+            }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+            });
+    
+            
+            
+
+
+        // if (searchbarText.value === value) {
+        //     console.log("true")
+
+        //     // showFriendLi.innerHTML = searchbarText;
+        //     // showFriendLi.innerHTML = value;
+
+        //     // ulSearchedFriends.appendChild(showFriendLi);
+
+        // } else {
+        //     showFriendLi.innerHTML = "no friends found"
+        //     ulSearchedFriends.appendChild(showFriendLi);
+
+        // }
         
 
+
+
+          
     }
 
+    
+
     addFriendModal() {
+        
+        // search bar
+        let searchbarText = document.getElementById('searchbar');
+        // serached friends li
+        let ulSearchedFriends = document.getElementById('ul-searched-friends');
+
+        
 
         // Get the modal
         var modal = document.getElementById("myModal");
@@ -98,14 +165,18 @@ class Homepage extends React.Component {
         // When the user clicks on <span> (x), close the modal
         span.onclick = function(event) {
             modal.style.display = "none";
+            searchbarText.value = "";
+            ulSearchedFriends.innerHTML = "";
         }
 
         // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
+        // window.onclick = function(event) {
+        //     if (event.target === modal) {
+        //         modal.style.display = "none";
+        //     }
+        // }
+
+
 
         
     }
@@ -167,17 +238,19 @@ class Homepage extends React.Component {
                     <div className="side-menu-wrapper">
                         
                         <div className="side-menu-top">
-
-                            <p>
-                                Welcome back, <span id="username"></span>!
-                            </p>
-                            
-                            <button>
+                            <div>
+                                <p>
+                                    Welcome back, <span id="username"></span>!
+                                </p>
+                            </div>
+                            <div>
+                                <button>
                                 Settings
                             </button>
                             <button id="addFriendModalBtn" onClick={this.addFriendModal}>
                                 Add Friend
                             </button>
+                            </div>
                         </div>
                         <div className="friends-chats">
                             <h3>
@@ -215,7 +288,7 @@ class Homepage extends React.Component {
                             <p>Some text in the Modal..</p>
                             <div>
                                 <input type="text" name="searchbar" id="searchbar" placeholder="Search"/>
-                                    <button >Search</button>
+                                    <button id="search-friend-btn" onClick={this.searchFriend} >Search</button>
                                 <ul id="ul-searched-friends">
 
                                 </ul>
