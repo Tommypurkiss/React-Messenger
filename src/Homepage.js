@@ -41,80 +41,128 @@ class Homepage extends React.Component {
         // next to a user maybe have an add friend plus button which will send a friend request?
         // searched firends is = database returning the users 
         
-
-
-
-
-
-
-        // const uid = "ueyYgjPNXwgZjhc9VytQ1kMF9zh2"
-        var db = fire.database();
-
-        var ref = db.ref("users/");
-
-        // var ref = db.ref("users/" + uid + "/username");
-        // var ref = db.ref(listAllUsers());
-
-
-
-        // function* searchUsers(action) {
-        //     const database = fire.database();
-        //     const ref = database.ref('users');
-        //     try {
-        //         console.log('about to fetch filters users');
-        //         const query = ref.orderByChild('username').startAt(action.searchText).endAt(action.searchText + "\uf8ff");
-        //         // const query = ref.orderByChild('username').startAt(action.searchText.charAt(0));
-
-        //         // const snapshot = yield call([query, query.once], 'value');
-        //         const snapshot = yield call([query, query.once], 'value');
-                
-        //         snapshot.forEach(function(child) { 
-        //         console.log(child.key, child.val().username);
-        //         });
-        //         console.log('done fetching users');
-        //         console.log(snapshot);
-        //     }
-        //     catch(error){
-        //         console.log(error);
-        //     }
-        // }
-        // searchUsers()
-
-
-
+        // Variables
         let searchedFriendUsername = "AngryTh0mas" // pretend this is a user in db
         let searchbarText = document.getElementById('searchbar');
         let ulSearchedFriends = document.getElementById('ul-searched-friends');
         let showFriendLi = document.createElement("li");
 
-        // let value = ""
-        ref.on("value", function(snapshot) {
 
-            let value = snapshot.val();
+        // test both uid
+        // var testUid = ["GGzDPRNquKZGSdSlx1IU2BRhPEI3", "ueyYgjPNXwgZjhc9VytQ1kMF9zh2"];
+        // var testUid = {
+        //     GGzDPRNquKZGSdSlx1IU2BRhPEI3: {
+        //         username: "Tommy Purkiss"
+        //     },
             
-            console.log("value is: ", value);
+        //     ueyYgjPNXwgZjhc9VytQ1kMF9zh2: {
+        //         username: "new user"
+        //     }
+        // }
 
 
-            if (searchbarText.value === value) {
-                console.log("true")
+
+        // var mappedUid = testUid.map((oneuid) => oneuid);
+        // testUid.forEach(item => console.log(item));
+
+
+        // const uid = "ueyYgjPNXwgZjhc9VytQ1kMF9zh2"
+        // var db = fire.database();
+
+        // var ref = db.ref("users/" + uid + "/username");
+        // var ref = db.ref("users/" + mappedUid + "/username");
+        // var ref = db.ref("/users/").orderByChild("username").equalTo(searchbarText);
+
+        // var ref = db.ref("users/" + uid + "/username");
+        // var ref = db.ref(listAllUsers());
+        // var ref = db.ref("users/").orderByChild("username");
+        // console.log("ref value is: ", ref)
+
+
+
+
+        // function* searchUsers(action) {
+            // const database = fire.database();
+            // const ref = database.ref('users/' + testUid).orderByChild("username").equalTo(searchbarText);
+            // try {
+            //     console.log('about to fetch filters users');
+            //     // ref.orderByChild(mappedUid);
+            //     // const query = ref.orderByChild('username').startAt(action.searchText).endAt(action.searchText + "\uf8ff");
+            //     // const query = ref.orderByChild('username').startAt(action.searchText.charAt(0));
+
+            //     // const snapshot = yield call([query, query.once], 'value');
+            //     // const snapshot = yield call([query, query.once], 'value');
+                
+            //     // snapshot.forEach(function(child) { 
+            //     // console.log(child.key, child.val().username);
+            //     // });
+            //     // console.log('done fetching users');
+            //     // console.log(snapshot);
+
+
+            //     ref.on("value", function(snapshot) {
+
+            //         let value = snapshot.val();
+                    
+            //         console.log("value is: ", value);
+        
+        
+            //         if (searchbarText.value === value) {
+            //             console.log("true")
+            
+            //             // showFriendLi.innerHTML = searchbarText.value;
+            //             showFriendLi.innerHTML = value;
+            
+            //             ulSearchedFriends.appendChild(showFriendLi);
+            
+            //         }
+            //         else if (searchbarText.value !== value) {
+            //             showFriendLi.innerHTML = "no friends found"
+            //             ulSearchedFriends.appendChild(showFriendLi);
+            //         }
+            //         }, function (errorObject) {
+            //         console.log("The read failed: " + errorObject.code);
+            //         });
+            
+            // }
+            // catch(error){
+            //     console.log(error);
+            // }
+        // }
+        // searchUsers()
+
+
+
+        
+
+        // // let value = ""
+        // ref.on("value", function(snapshot) {
+
+        //     let value = snapshot.val();
+            
+        //     console.log("snapshot value is: ", value);
+
+
+        //     if (searchbarText.value === value) {
+        //         console.log("true")
     
-                // showFriendLi.innerHTML = searchbarText.value;
-                showFriendLi.innerHTML = value;
+        //         // showFriendLi.innerHTML = searchbarText.value;
+        //         showFriendLi.innerHTML = value;
     
-                ulSearchedFriends.appendChild(showFriendLi);
+        //         ulSearchedFriends.appendChild(showFriendLi);
     
-            }
-            else if (searchbarText.value !== value) {
-                showFriendLi.innerHTML = "no friends found"
-                ulSearchedFriends.appendChild(showFriendLi);
-            }
+        //     }
+        //     else if (searchbarText.value !== value) {
+        //         showFriendLi.innerHTML = "no friends found"
+        //         ulSearchedFriends.appendChild(showFriendLi);
+        //     }
 
  
     
 
-            }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-            });
+        //     }, function (errorObject) {
+        //     console.log("The read failed: " + errorObject.code);
+        //     });
     
             
             
@@ -202,7 +250,7 @@ class Homepage extends React.Component {
         ref.on("value", function(snapshot) {
 
         let usernameText = document.querySelector('#username');
-        usernameText.innerHTML = snapshot.val();
+        usernameText.innerHTML = snapshot.val(); // TODO: there was a problem with logging in and innerhtml
         console.log("username text val is: ", usernameText);
 
         }, function (errorObject) {
